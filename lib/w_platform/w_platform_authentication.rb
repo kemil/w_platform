@@ -17,7 +17,7 @@ module WPlatformAuthentication
   end
 
   def call_w_platform_api(api_address)
-    begin
+    #begin
       Rails.logger.info "\n\n*****\n Requesting to API :#{api_address}\n\n"
 
       url = URI.parse(api_address)
@@ -38,11 +38,11 @@ module WPlatformAuthentication
       end
       ActiveSupport::JSON.decode(res.body)
 
-    rescue => e
-      Rails.logger.info "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
-      puts "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
-      ""
-    end
+#    rescue => e
+#      Rails.logger.info "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
+#      puts "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
+#      ""
+#    end
   end
 
   def access_skipped_controllers?(skipped_controllers, controller_name, action_name="index")

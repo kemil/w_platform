@@ -17,7 +17,7 @@ module WPlatformAuthentication
   end
 
   def call_w_platform_api(api_address)
-    #begin
+    begin
       Rails.logger.info "\n\n*****\n Requesting to API :#{api_address}\n\n"
 
       url = URI.parse(api_address)
@@ -38,11 +38,11 @@ module WPlatformAuthentication
       end
       ActiveSupport::JSON.decode(res.body)
 
-#    rescue => e
-#      Rails.logger.info "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
-#      puts "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
-#      ""
-#    end
+    rescue => e
+      Rails.logger.info "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
+      puts "\n\n*****Something Wrong when access API :#{api_address}\n\n ****Error: #{e.inspect}"
+      ""
+    end
   end
 
   def access_skipped_controllers?(skipped_controllers, controller_name, action_name="index")
@@ -65,9 +65,12 @@ module WPlatformAuthentication
     result = call_w_platform_api(api_address)
     if result and result['user']
       user_data = result['user']
+      require 'pp'
+      pp result
       session[:features] = user_data['features']
       session[:company_products] = user_data['company_products']
       session[:company] = user_data['user_company']
+      session[:products] = user_data['products']
       user = { 'first_name' => user_data['first_name'],
         'last_name' => user_data['last_name'],
         'email' => user_data['email'],

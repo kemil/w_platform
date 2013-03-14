@@ -65,8 +65,6 @@ module WPlatformAuthentication
     result = call_w_platform_api(api_address)
     if result and result['user']
       user_data = result['user']
-      require 'pp'
-      pp result
       session[:features] = user_data['features']
       session[:company_products] = user_data['company_products']
       session[:company] = user_data['user_company']

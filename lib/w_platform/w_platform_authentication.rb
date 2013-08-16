@@ -33,7 +33,7 @@ module WPlatformAuthentication
         req = Net::HTTP.new(url.host, url.port)
         req.use_ssl = true
         req.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        http = Net::HTTP::Get.new(url.request_uri)
+        http = Net::HTTP::Get.new(url.path)
         res = req.request(http)
       end
       ActiveSupport::JSON.decode(res.body)
@@ -72,7 +72,8 @@ module WPlatformAuthentication
       user = { 'first_name' => user_data['first_name'],
         'last_name' => user_data['last_name'],
         'email' => user_data['email'],
-        'login_time' => user_data['login_time']
+        'login_time' => user_data['login_time'],
+        'login' => user_data['login']
       }
       session[:user_platform] = user
     end

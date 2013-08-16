@@ -73,7 +73,8 @@ module WPlatformAuthentication
         'last_name' => user_data['last_name'],
         'email' => user_data['email'],
         'login_time' => user_data['login_time'],
-        'login' => user_data['login']
+        'login' => user_data['login'],
+        'id' => user_data['id']
       }
       session[:user_platform] = user
     end
